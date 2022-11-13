@@ -1,0 +1,25 @@
+{% extends "maestra.html" %}
+{% block titulo %}
+Editar movie
+{% endblock %}
+{% block contenido %}
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-3">Editar movie</h3>
+            <form action="{{url_for('actualizar_movie')}}" method="post">
+                {# Enviar el id en un campo oculto #}
+                <input type="hidden" name="id" value="{{movie[0]}}">
+                <label for="nombre">Nombre:</label>
+                <input value="{{movie[1]}}" required type="text" class="input" placeholder="Nombre" name="nombre" id="nombre">
+                <label for="director">Director</label>
+                <input value="{{movie[2]}}" required type="text" class="input" placeholder="Director" name="director" id="director">
+                <label for="year">Year</label>
+                <input value="{{movie[3]}}" required type="number" class="input" placeholder="Year" name="year" id="year">
+                <button type="submit" class="button is-success mt-2">Guardar</button>
+                <a href="{{url_for('movies')}}" class="button is-primary mt-2">Volver</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "maestra.html" %}
+{% block titulo %} Movies {% endblock %}
+{% block contenido %}
+
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <h3 class="is-size-3">Movies</h3>
+            <a href="{{url_for('formulario_agregar_movie')}}" class="button is-success">Agregar</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Director</th>
+                        <th>Year</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movie in movies %}
+                    <tr>
+                        <td>{{movie[1]}}</td>
+                        <td>{{movie[2]}}</td>
+                        <td>{{movie[3]}}</td>
+                        <td>
+                            {# Pasar el id (lo que hay en la tabla movie[0] #}
+                            <a href="{{url_for('editar_movie', id=movie[0])}}" class="button is-info">Editar</a>
+                        </td>
+                        <td>
+                            <form action="{{url_for('eliminar_movie')}}" method="POST">
+                                <input type="hidden" name="id" value="{{movie[0]}}">
+                                <button class="button is-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
